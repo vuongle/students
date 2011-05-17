@@ -1,0 +1,39 @@
+<h2>Home page</h2>
+<div>
+	<% if user_signed_in?%>
+		Welcome,  <%= current_user.first_name%> ! <%= link_to 'Sign out', destroy_user_session_path%>
+	<% else %>
+		<%= link_to 'Sign up', new_user_registration_path %> | 
+		<%= link_to 'Sign in', :controller => 'devise/sessions', :action =>'new'%>
+	<% end%>
+</div>
+
+<p>User list</p>
+<table border="1" width="100%">
+  <tr>
+    <th width="15%">First name</th>
+    <th width="15%">Last name</th>
+    <th width="20%">Email</th>
+    <th width="15%">Role</th>
+    <th width="15%">Phone number</th>
+    <th width="10%">Last login</th>
+    <th width="10%">Actions</th>
+  </tr>
+  <%@users.each do |user|%>
+	  <tr>
+		<td><%= user.first_name %></td>
+		<td><%= user.last_name %></td>
+		<td><%= user.email %></td>
+		<td><%= user.role %></td>
+		<td><%= user.phone_number %></td>
+		<td><%= user.last_sign_in_at %></td>
+		<td>
+			<% if user_signed_in? %>
+				<% if current_user.id == user.id %>
+					<%= link_to 'Edit', edit_user_registration_path(current_user)%>
+				<% end%>
+			<% end %>
+		</td>
+	  </tr>
+  <% end %>
+</table>
