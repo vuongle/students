@@ -8,6 +8,9 @@ gem 'rails', '3.0.7'
 # gem 'sqlite3'
 gem 'mysql'
 
+# Use devise gem for authentication
+gem 'devise', '1.3.4'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
