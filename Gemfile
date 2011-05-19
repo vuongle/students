@@ -11,6 +11,8 @@ gem 'mysql'
 # Use devise gem for authentication
 gem 'devise', '1.3.4'
 
+gem 'tlsmail'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -1,4 +1,8 @@
 Students::Application.configure do
+
+  # For using mail with devise and google's smtp server
+  require 'tlsmail'
+  
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -23,7 +27,22 @@ Students::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-  # Config mail server(Used by devise gem)
+  # Config google's smtp server with devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.smtp_settings = {
+	  :enable_starttls_auto => true,  
+	  :address              => 'smtp.gmail.com',
+	  :port                 => 587,
+	  :tls                  => true,
+	  :domain               => 'gmail.com',
+	  :authentication       => :plain,
+	  :user_name            => 'vuonglg@gmail.com',
+	  :password             => 'vuonglq1986'
+  }
+
 end
 
