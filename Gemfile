@@ -13,6 +13,11 @@ gem 'devise', '1.3.4'
 
 gem 'tlsmail'
 
+# Use haml
+gem 'haml'
+
+gem 'rake', '0.9.0'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

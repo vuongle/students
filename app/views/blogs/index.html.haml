@@ -1,0 +1,29 @@
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+%h1 Listing blogs
+
+%table{:id => 'blogs_list', :width => '100%', :border => '1'}
+    %tr{:align => 'center'}
+        %th{:width => '25%'} Title
+        %th{:width => '25%'} Content
+        %th{:width => '25%'} User
+        %th{:width => '25%', :colspan => '3'} User Actions
+    - @blogs.each do |blog|
+        %tr{ :align => 'left' }
+            %td= blog.title
+            %td= blog.content
+            %td= blog.user.first_name
+            %td{:colspan => '3'}
+                - if user_signed_in?
+                    - if current_user.id == blog.user.id
+                        = link_to 'Edit', edit_blog_path(blog)
+
+/ If user doesn't log in, display a link to allow the user to log in.
+/ Else, display a link to allow the user to create a new blog
+%br
+%div
+    - if user_signed_in?
+        = link_to 'Create a new blog', new_blog_path
+        %br
+        = link_to 'Sign out', destroy_user_session_path
+    - else
+        = link_to 'Sign in to create a blog', new_user_session_path
